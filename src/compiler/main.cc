@@ -1,7 +1,13 @@
-/*
-compiler/main.cc
-只接受输入文件并编译
-*/
+/**
+ * @file main.cc
+ * @author pointer-to-bios
+ * @brief 编译器
+ * @version 0.1
+ * @date 2022-05-14
+ * 
+ * @copyright Copyright (c) 2022 Random World Studio
+ * 
+ */
 
 #include <iostream>
 #include <fstream>
@@ -17,7 +23,7 @@ int main(int argc, char **argv)
 {
     if (argc == 1) //缺参数直接报错
     {
-        ran::err("ranc", "\033[31m\033[1m[fatal]\033[0m no input file.");
+        ran::fatal("ranc", "no input file.");
         exit_compiling(-1);
     }
     //打开文件

@@ -13,8 +13,12 @@ namespace ran
 
     void err(std::string exec, std::string context)
     {
-
         std::cerr << "\033[32m[" << exec << "]\033[31m[error]\033[0m " << context << std::endl;
+    }
+
+    void fatal(std::string exec, std::string context)
+    {
+        err(exec, std::string("\033[31m\033[1m[fatal]\033[0m ") + context);
     }
 };
 #endif

@@ -1,8 +1,14 @@
-/*
-preprocessor/main.cc
-接受文件并预处理
-包括移除注释、去掉多余空格、去掉多余分号以及所有换行
-*/
+/**
+ * @file main.cc
+ * @author pointer-to-bios
+ * @brief 接受文件并预处理
+ * 包括移除注释、去掉多余空格、去掉多余分号以及所有换行
+ * @version 0.1
+ * @date 2022-05-14
+ * 
+ * @copyright Copyright (c) 2022 Random World Studio
+ * 
+ */
 
 #include <iostream>
 #include <fstream>
@@ -24,7 +30,7 @@ int main(int argc, char **argv)
 {
     if (argc == 1) //缺参数直接报错
     {
-        ran::err(RANP, "\033[31m\033[1m[fatal]\033[0m no input file.");
+        ran::fatal(RANP, "no input file.");
         exit_compiling(-1);
     }
     //读取源文件

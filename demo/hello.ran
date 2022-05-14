@@ -1,4 +1,4 @@
-import stdio.*;
+import io.*;
 
 /*定义数组，
 多行注释
