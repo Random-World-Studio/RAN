@@ -1,3 +1,0 @@
-/home/pointer-to-bios/Random World Studio/Projects/RAN/build/CMakeFiles/ranc.dir
-/home/pointer-to-bios/Random World Studio/Projects/RAN/build/CMakeFiles/edit_cache.dir
-/home/pointer-to-bios/Random World Studio/Projects/RAN/build/CMakeFiles/rebuild_cache.dir

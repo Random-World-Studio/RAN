@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/ranc.dir/src/compiler/main.cc.o -o ranc 
