@@ -1,11 +1,14 @@
 import stdio.*;
 
-hello{"Hello", "你好", "Hallo", "Привет", "Bonjour"};
+/*定义数组，
+多行注释
+*/
+hello{"Hello", "你好", "Hallo",     "Привет", "Bonjour"};
 
-export def main():
+export def main()://这是函数声明，单行注释
 
     out.println("Hello World!");
-    for (&str : hello):
+    for (&str :   hello):
         str += "!";
         out.println(str);
     endfor;
