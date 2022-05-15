@@ -1,1 +1,0 @@
-import stdio.*;hello{"Hello","你好","Hallo","Привет","Bonjour"};export def main():out.println("Hello World!");for (&str :hello):str +="!";out.println(str);endfor;enddef;
