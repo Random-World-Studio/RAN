@@ -12,6 +12,14 @@ import hello;//引用hello模块
 
 A = 5;
 
+s = "hello";
+
+b = true;
+
+struct mystruct1:
+
+endstruct;
+
 //取消数组的概念
 //完全使用地址替代
 //如果用数组风格声明，可以使用len获取长度
@@ -24,6 +32,8 @@ export def main()://由于main函数需要被操作系统调用，所以需要ex
     a = A@;
     number = addmul(@a, 6);
 
+    number += (i = number, j = @a) -> i * j;//直接使用lambda表达式
+
     quick_sort(listA, listA + len(listA));
 
     swap_time = 0;
@@ -34,23 +44,23 @@ export def main()://由于main函数需要被操作系统调用，所以需要ex
 
 enddef;
 
-def addmul(a#int, b#int)#int -> (a + b) * b;//lambda表达式
+def addmul(a#int, b#int)#int -> (a + b) * b;//将函数声明为lambda表达式
 enddef;//这里的函数声明没有export说明其它模块无法访问
 
 def quick_sort(begin#addr(int), end#addr(int)):
 
-    if(end - begin == 2):
+    if(end - begin == 2)://多行if语句，以endif结尾
         if(begin[0] > begin[1]) swap(begin, begin + 1);
         return;
     endif;
 
     i = 0, j = end - begin - 1;
-    while (i != j):
+    while (i != j)://多行while语句，以endwhile结尾
 
-        while (begin[i] < begin[j]) j -= 1;
+        while (begin[i] < begin[j]) j -= 1;//单行while语句
         swap(begin + i, begin + j);
 
-        if (i == j) break;
+        if (i == j) break;//单行if语句
 
         while (begin[i] < begin[j]) i += 1;
         swap(begin + i, begin + j);

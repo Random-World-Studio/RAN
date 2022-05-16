@@ -11,3 +11,4 @@
 |   6    |   byte   |
 |   7    |  float   |
 |   8    |   str    |
+|   9    |   bool   |

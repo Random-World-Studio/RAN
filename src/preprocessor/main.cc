@@ -5,9 +5,9 @@
  * 包括移除注释、去掉多余空格、去掉多余分号以及所有换行
  * @version 0.1
  * @date 2022-05-14
- * 
+ *
  * @copyright Copyright (c) 2022 Random World Studio
- * 
+ *
  */
 
 #include <iostream>
@@ -89,6 +89,14 @@ void preprocess()
             }
             code.erase(i, x - i);
         }
+    }
+    instring = false;
+    for (int i = 0; i < code.length(); i++)
+    {
+        if (code[i] == '\"')
+        {
+            instring = !instring;
+        }
         //删除多余空格、换行、缩进
         if (!instring)
         {
@@ -144,10 +152,14 @@ void preprocess()
             }
         }
     }
-    //删除标点符号后的空格
+    //删除标点符号前后的空格
     for (int i = 0; i < code.length(); i++)
         if (puncutations.find(code[i]) != std::string::npos)
+        {
             if (code[i + 1] == ' ')
                 code.erase(i + 1, 1);
+            if (i != 0 && code[i - 1] == ' ')
+                code.erase(i - 1, 1);
+        }
     ran::log(RANP, "Preprocessing terminated.");
 }
