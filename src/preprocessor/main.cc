@@ -57,6 +57,18 @@ void exit_compiling(int exit_num)
     exit(exit_num);
 }
 
+std::string read_file(std::ifstream &file)
+{
+    std::string src = "";
+    char tmp;
+    while (!file.eof())
+    {
+        file.read(&tmp, 1);
+        src += tmp;
+    }
+    return src;
+}
+
 void preprocess()
 {
     ran::log(RANP, "Preprocessing...");

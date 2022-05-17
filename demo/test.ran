@@ -12,7 +12,7 @@ import hello;//引用hello模块
 
 A = 5;
 
-s = "hello";
+s = "hello\n";
 
 b = true;
 

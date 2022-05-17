@@ -5,6 +5,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <regex>
 
 namespace ran
 {
@@ -12,8 +13,6 @@ namespace ran
     enum lextype //词法类型
     {
         keyword,    //关键字
-        area_start, //作用域起始
-        area_end,   //作用域结束
         tag,        //符号
         __operator, //运算符
         number,     //数字
@@ -41,36 +40,61 @@ namespace ran
         std::vector<pair> list;
         while (!code.empty())
         {
-            if (puncutations.find(code[0]) != std::string::npos) //如果第一个字符是标点符号
+            if (puncutations.find(code[0]) == std::string::npos) //这是一个单词
             {
-                if (relatedpunc.find(code[0]) == std::string::npos) //无关符号就直接擦掉
+                int count = 0;
+                while (puncutations.find(code[count]) == std::string::npos)
+                    count++;
+                std::string str = code.substr(0, count);
+                lextype t = lextype::tag;
+                if (std::find(keywords.begin(), keywords.end(), str) != keywords.end()) //匹配关键字
+                    t = lextype::keyword;
+                if (std::regex_match(str, std::regex("0?[x|b]?\\d+"))) //匹配数字
+                    t = lextype::number;
+                list.push_back({str, t});
+                code.erase(0, count);
+            }
+            else if (code[0] == '\"') //字符串
+            {
+                int count = 1;
+                while (code[count] != '\"')
+                    count++;
+                count++;
+                list.push_back({code.substr(0, count), lextype::string});
+                code.erase(0, count);
+            }
+            else
+            {
+                //匹配运算符
+                bool b = false;
+                std::string str("");
+                for (int i = 0; i < operators.length(); i++)
                 {
-                    code.erase(0, 1);
-                }
-                else
-                { //有关符号加入词法列表
-                    std::string str = std::string("" + code[0]);
-                    code.erase(0, 1);
-                    if (relatedpunc.find(code[0]) != std::string::npos)
+                    if (code[0] == operators[i])
                     {
-                        str += std::string("" + code[0]);
-                        code.erase(0, 1);
+                        str += code[0];
+                        b = true;
+                        break;
+                    }
+                }
+                if (b)
+                {
+                    //匹配双字符运算符
+                    code.erase(0, 1);
+                    for (int i = 0; i < ex_ope.length(); i++)
+                    {
+                        if (code[0] == ex_ope[i])
+                        {
+                            str += code[0];
+                            code.erase(0, 1);
+                            break;
+                        }
                     }
                     list.push_back({str, lextype::__operator});
                 }
+                else//无法匹配就扫描下一个
+                    code.erase(0, 1);
             }
-            //现在第一个词一定是单词
-            int count = 0;
-            while (puncutations.find(code[count]) == std::string::npos)
-                count++;
-            std::string str = code.substr(0, count);
-            code.erase(0, count);
-            lextype t;
-            if (std::find(keywords.begin(), keywords.end(), str) != keywords.end())
-                t = lextype::keyword;
-            else
-                t = lextype::tag;
-            list.push_back({str, t});
         }
         ran::log(RANC, "Lexy list produced.");
         return list;
