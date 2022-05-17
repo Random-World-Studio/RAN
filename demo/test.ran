@@ -36,6 +36,10 @@ export def main()://由于main函数需要被操作系统调用，所以需要ex
 
     number += (i = number, j = @a) -> i * j;//直接使用lambda表达式
 
+    for(ele @: listA)://for-each循环，使用‘@:’可以使用数组中的值的引用
+        ele += 1;
+    endfor;
+
     quick_sort(listA, listA + len(listA));
 
     swap_time = 0;
