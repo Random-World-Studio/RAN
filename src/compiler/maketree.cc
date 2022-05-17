@@ -37,6 +37,7 @@ namespace ran
 
     std::vector<pair> lexy(std::string code)
     {
+        ran::log(RANC, "Producing a lexy list...");
         std::vector<pair> list;
         while (!code.empty())
         {
@@ -71,5 +72,7 @@ namespace ran
                 t = lextype::tag;
             list.push_back({str, t});
         }
+        ran::log(RANC, "Lexy list produced.");
+        return list;
     }
 };
