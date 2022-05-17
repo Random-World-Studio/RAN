@@ -43,7 +43,8 @@ int main(int argc, char **argv)
     ran::log(RANC, "Reading source code succeeded.");
 
     ran::log(RANC, "Start compiling...");
-    make_tree(code);
+
+    ran::make_tree(code);//生成语法树
 
     ran::log(RANC, "Compiling succeed.");
 }

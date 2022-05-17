@@ -17,7 +17,7 @@
 #include "../global/crlf.hh"
 #include "../global/puncutation.hh"
 
-#define RANP "ran preprocess"
+const std::string RANP =  "ran preprocess";
 
 std::string code;
 

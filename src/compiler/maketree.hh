@@ -3,8 +3,11 @@
 
 #include <iostream>
 
-#define RANC "ran compile"
+const std::string RANC = "ran compile";
 
-void make_tree(std::string);
+namespace ran
+{
+    void make_tree(std::string);
+};
 
 #endif

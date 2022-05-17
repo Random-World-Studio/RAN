@@ -2,7 +2,41 @@
 #define PUNCUTATION_HH
 
 #include <iostream>
+#include <vector>
 
-std::string puncutations(",./<>?;\':\"[]\\{}|`-=~!@#$%^&*()_+");
+std::string puncutations(",./<>?;\':\"[]\\{}|`-=~!@#$%^&*()+ ");
+
+std::string relatedpunc(":[]{}~!@#%^&*-=+");
+
+std::string operators("<>?:[]~!@%^&*-=+");
+
+std::vector<std::string> keywords = {
+    "struct",
+    "endstruct",
+    "true",
+    "false",
+    "if",
+    "endif",
+    "while",
+    "endwhile",
+    "for",
+    "endfor",
+    "return",
+    "def",
+    "enddef",
+    "modname",
+    "import",
+    "export",
+    "break",
+    "continue",
+    "int",
+    "uint",
+    "short",
+    "ushort",
+    "char",
+    "byte",
+    "str",
+    "bool",
+    "addr"};
 
 #endif

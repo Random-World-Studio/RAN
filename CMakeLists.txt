@@ -4,4 +4,4 @@ project(RAN)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(ranp src/preprocessor/main.cc src/global/log.cc)
-add_executable(ranc src/compiler/main.cc src/compiler/comp.cc src/global/log.cc)
+add_executable(ranc src/compiler/main.cc src/compiler/maketree.cc src/global/log.cc)
