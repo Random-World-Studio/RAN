@@ -17,12 +17,14 @@ s = "hello";
 b = true;
 
 struct mystruct1:
-
+    name#str,
+    uint,
+    next#addr(mystruct1),
 endstruct;
 
 //取消数组的概念
 //完全使用地址替代
-//如果用数组风格声明，可以使用len获取长度
+//如果用数组风格声明，可以使用len()获取长度
 listA#addr(int){4, 12, 8, 1, 17, 3, 0, 5, 9, 11, 2, 14, 20, 6, 7, 13, 10, 16, 15, 19, 18};
 
 export def main()://由于main函数需要被操作系统调用，所以需要export
