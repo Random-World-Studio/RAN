@@ -14,13 +14,20 @@
 
 #include "../global/log.hh"
 
-#include "comp.hh"
+#include "maketree.hh"
 
 std::string code;
 
 void exit_compiling(int);               //编译结束函数
 std::string read_file(std::ifstream &); //读取文件
 
+/**
+ * @brief 主函数
+ * 
+ * @param argc 
+ * @param argv 参数共两项：第一项是输入文件，第二项是输出文件
+ * @return int 
+ */
 int main(int argc, char **argv)
 {
     if (argc == 1) //缺参数直接报错

@@ -66,7 +66,7 @@ def quick_sort(begin#addr(int), end#addr(int)):
 
         while (begin[i] < begin[j]) i += 1;
         swap(begin + i, begin + j);
-    
+
     endwhile;
 
     quick_sort(begin, i);
