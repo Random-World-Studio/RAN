@@ -18,7 +18,6 @@
 
 std::string code;
 
-void exit_compiling(int);               //编译结束函数
 std::string read_file(std::ifstream &); //读取文件
 
 /**
@@ -47,11 +46,6 @@ int main(int argc, char **argv)
     ran::log(RANC, "Compiling succeeded.");
 }
 
-void exit_compiling(int exit_num)
-{
-    ran::log(RANC, "compiling terminated.");
-    exit(exit_num);
-}
 
 std::string read_file(std::ifstream &file)
 {

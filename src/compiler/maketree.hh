@@ -2,10 +2,11 @@
 #define MAKETREE_HH
 
 #include "compilerdef.hh"
+#include "syntaxtree.hh"
 
 namespace ran
 {
-    void make_tree(std::string);
+    syntax_tree make_tree(std::string);
 };
 
 #endif
