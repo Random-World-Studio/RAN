@@ -6,7 +6,7 @@
 
 std::string puncutations(",./<>?;\':\"[]\\{}|`-=~!@#$%^&*()+ ");
 
-std::string operators("<>?:[]~!@#%^&*-=+,.()");
+std::string operators("<>?:[]~!@#%^&*-=+,.();");
 std::string ex_ope("=&|");
 
 std::vector<std::string> keywords = {
@@ -36,6 +36,7 @@ std::vector<std::string> keywords = {
     "byte",
     "str",
     "bool",
-    "addr"};
+    "addr",
+    "asm"};
 
 #endif

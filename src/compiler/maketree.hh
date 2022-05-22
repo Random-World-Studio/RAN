@@ -1,9 +1,7 @@
 #ifndef MAKETREE_HH
 #define MAKETREE_HH
 
-#include <iostream>
-
-const std::string RANC = "ran compile";
+#include "compilerdef.hh"
 
 namespace ran
 {
