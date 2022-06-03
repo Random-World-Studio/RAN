@@ -1,21 +1,33 @@
 #include "syntaxtree.hh"
 
+#include "../debug/sttree.hh"
+
+#include "treeproducer.hh"
+
 namespace ran
 {
-    std::string getmodname(std::vector<pair> lexlist);
+    std::string getmodname(std::vector<pair> &lexlist);
+    void build_tree(syntax_tree, std::vector<pair>);
 
     syntax_tree produce_sttree(std::vector<pair> lexlist)
     {
         log(RANC, "Producing syntax tree...");
         std::string modname = getmodname(lexlist);
-        syntax_tree prod = new StTree(modname);
+        syntax_tree prod = new StTree;
+        {
+            prod->father = nullptr;
+            prod->type = syntax::__tag;
+            prod->content = modname;
+            prod->content_discription = "module";
+        }
         //开始生成语法树
-        
+        build_tree(prod, lexlist);
+        outputTree(prod, 0, true, true);
         log(RANC, "Exceeded producing syntax tree.");
         return prod;
     }
 
-    std::string getmodname(std::vector<pair> lexlist)
+    std::string getmodname(std::vector<pair> &lexlist)
     {
         std::string modname;
         for (int i = 0; i < lexlist.size(); i++)
@@ -61,83 +73,34 @@ namespace ran
         return modname;
     }
 
-    __StTree::__StTree(std::string word)
+    void build_tree(syntax_tree sttree, std::vector<pair> lexlist)
     {
-        this->word = word;
-    }
-
-    __StTree::~__StTree()
-    {
-        for (__StTree *it : child)
+        while (lexlist.size() != 0)
         {
-            delete it;
+            if (lexlist.at(0).type == lextype::keyword) //处理关键字
+            {
+                if (lexlist.at(0).word == "export")
+                {
+                    export_flag = true;
+                    LEXDEL;
+                }
+                else if (lexlist.at(0).word == "import")
+                {
+                    make_import(sttree, lexlist);
+                }
+                else if (lexlist.at(0).word == "struct")
+                {
+                    make_struct(sttree, lexlist);
+                }
+                else
+                {
+                    LEXDEL;
+                }
+            }
+            else
+            {
+                LEXDEL;
+            }
         }
     }
-
-    void __StTree::addChild(__StTree *ch)
-    {
-        child.push_back(ch);
-    }
-
-    void __StTree::delLastChild()
-    {
-        child.pop_back();
-    }
-
-    void __StTree::setFather(__StTree *fa)
-    {
-        this->father = fa;
-    }
-
-    __StTree *__StTree::getFather()
-    {
-        return father;
-    }
-
-    void __StTree::setType(syntax t)
-    {
-        this->treetype = t;
-    }
-
-    __StTree::syntax __StTree::getType()
-    {
-        return this->treetype;
-    }
-
-    std::vector<__StTree *> __StTree::getChildList()
-    {
-        return child;
-    }
-
-    StTree::StTree(std::string name)
-    {
-        root = new __StTree(name);
-        current = root;
-        current->setType(__StTree::syntax::__module);
-        current->setFather(nullptr);
-    }
-
-    StTree::~StTree()
-    {
-        delete root;
-    }
-
-    bool StTree::switch_to_child(int child)
-    {
-        if (current->getChildList().size() > child)
-            current = current->getChildList().at(child);
-        else
-            return false;
-        return true;
-    }
-
-    bool StTree::switch_to_father()
-    {
-        if (current->getFather())
-            current = current->getFather();
-        else
-            return false;
-        return true;
-    }
-
 };

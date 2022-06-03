@@ -1,6 +1,7 @@
 #include "maketree.hh"
 
 #include "../global/log.hh"
+#include "../debug/sttree.hh"
 
 #include "lex.hh"
 

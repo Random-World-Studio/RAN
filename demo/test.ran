@@ -11,7 +11,7 @@ import hello;//引用hello模块
 
 A = 5;
 
-s = "hello\n";
+s = "hello       world\n";
 
 b = true;
 
@@ -21,9 +21,11 @@ struct mystruct1:
     next#addr(mystruct1),
 endstruct;
 
-//取消数组的概念
-//完全使用地址替代
-//如果用数组风格声明，可以使用len()获取长度
+/*
+取消数组的概念
+完全使用地址替代
+如果用数组风格声明，可以使用len()获取长度
+*/
 listA#addr(int){4, 12, 8, 1, 17, 3, 0, 5, 9, 11, 2, 14, 20, 6, 7, 13, 10, 16, 15, 19, 18,};
 
 export def main()://由于main函数需要被操作系统调用，所以需要export
@@ -46,6 +48,8 @@ export def main()://由于main函数需要被操作系统调用，所以需要ex
         swap(listA + i, listA + len(listA) - i - 1);
         swap_time += 1;
     endfor;
+
+    mystruct1 person = {"pointer-to-bios", 2020, person@};
 
 enddef;
 

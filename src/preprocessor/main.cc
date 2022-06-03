@@ -17,7 +17,7 @@
 #include "../global/crlf.hh"
 #include "../global/puncutation.hh"
 
-const std::string RANP =  "ran preprocess";
+const std::string RANP = "ran preprocess";
 
 std::string code;
 
@@ -93,28 +93,30 @@ void preprocess()
     instring = false;
     for (int i = 0; i < code.length(); i++)
     {
+        if (code[i] == '\\')
+            i++;
         if (code[i] == '\"')
         {
             instring = !instring;
         }
+        if (instring)
+            continue;
         //删除多余空格、换行、缩进
-        if (!instring)
+        if (code[i] == ' ' && code[i + 1] == ' ')
         {
-            if (code[i] == ' ' && code[i + 1] == ' ')
+            while (code[i] == ' ' && code[i + 1] == ' ')
             {
-                while (code[i] == ' ' && code[i + 1] == ' ')
-                {
-                    code.erase(i + 1, 1);
-                }
-            }
-            if (code[i] == '\t' || code[i] == '\n')
-            {
-                while (code[i] == '\t' || code[i] == '\n')
-                {
-                    code.erase(i, 1);
-                }
+                code.erase(i + 1, 1);
             }
         }
+        if (code[i] == '\t' || code[i] == '\n')
+        {
+            while (code[i] == '\t' || code[i] == '\n')
+            {
+                code.erase(i, 1);
+            }
+        }
+
         // /* */多行注释
         if (code[i] == '/' && code[i + 1] == '*')
         {
@@ -134,32 +136,45 @@ void preprocess()
             }
         }
         //删除多余空格、换行、缩进
-        if (!instring)
+        if (code[i] == ' ' && code[i + 1] == ' ')
         {
-            if (code[i] == ' ' && code[i + 1] == ' ')
+            while (code[i] == ' ' && code[i + 1] == ' ')
             {
-                while (code[i] == ' ' && code[i + 1] == ' ')
-                {
-                    code.erase(i + 1, 1);
-                }
+                code.erase(i + 1, 1);
             }
-            if (code[i] == '\t' || code[i] == '\n')
+        }
+        if (code[i] == '\t' || code[i] == '\n')
+        {
+            while (code[i] == '\t' || code[i] == '\n')
             {
-                while (code[i] == '\t' || code[i] == '\n')
-                {
-                    code.erase(i, 1);
-                }
+                code.erase(i, 1);
             }
         }
     }
     //删除标点符号前后的空格
+    instring = false;
     for (int i = 0; i < code.length(); i++)
+    {
+        if (code[i] == '\\')
+            i++;
+        if (code[i] == '\"')
+        {
+            instring = !instring;
+        }
+        if (instring)
+            continue;
         if (puncutations.find(code[i]) != std::string::npos)
         {
             if (code[i + 1] == ' ')
+            {
                 code.erase(i + 1, 1);
+            }
             if (i != 0 && code[i - 1] == ' ')
+            {
                 code.erase(i - 1, 1);
+                i--;
+            }
         }
+    }
     ran::log(RANP, "Preprocessing terminated.");
 }

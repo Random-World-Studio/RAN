@@ -34,6 +34,8 @@ std::vector<std::string> keywords = {
     "ushort",
     "char",
     "byte",
+    "float",
+    "ufloat",
     "str",
     "bool",
     "addr",

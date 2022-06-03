@@ -4,67 +4,30 @@
 #include "compilerdef.hh"
 #include "lex.hh"
 
-#include "../global/log.hh"
-
 #include <vector>
+#include <set>
 
 namespace ran
 {
-    /**
-     * @brief 语法树节点
-     * 用于构建出代码的逻辑结构
-     */
-    class __StTree
+    enum syntax
     {
-    public:
-        enum syntax
-        {
-            __module,
-            __struct,
-            __function,
-            __variable,
-            __operator,
-            __expression,
-            __rightval,
-        };
-
-    private:
-        std::string word;
-        __StTree *father;
-        std::vector<__StTree *> child;
-        syntax treetype;
-
-    public:
-        __StTree(std::string);
-        ~__StTree();
-
-        void addChild(__StTree *);
-        void delLastChild();
-
-        void setFather(__StTree *);
-        __StTree *getFather();
-
-        void setType(syntax t);
-        syntax getType();
-
-        std::vector<__StTree *> getChildList();
+        __block,
+        __expression,
+        __number,
+        __tag,
     };
 
-    class StTree//语法树容器
+    struct StTree //语法树容器
     {
-    private:
-        __StTree *root;
-        __StTree *current;
+        StTree *father;
+        std::vector<StTree *> child;
 
-    public:
-        StTree(std::string);
-        ~StTree();
-
-        bool switch_to_child(int child);
-        bool switch_to_father();
+        std::string content;             //内容
+        std::string content_discription; //内容描述
+        syntax type;                     //类型
     };
 
-    typedef StTree *syntax_tree;//重定义语法树容器指针
+    typedef StTree *syntax_tree; //重定义语法树容器指针
 
     syntax_tree produce_sttree(std::vector<pair>);
 };
