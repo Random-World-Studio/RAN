@@ -58,7 +58,7 @@ namespace ran
         int membercount = 0; //成员计数，用于标记匿名成员
         while (lexlist.at(0).word != "endstruct" && !lexlist.empty())
         {
-            if (lexlist.at(0).type == lextype::keyword)//关键字开头的是匿名成员
+            if (lexlist.at(0).type == lextype::keyword) //关键字开头的是匿名成员
             {
                 syntax_tree node = new StTree;
                 {
@@ -76,7 +76,7 @@ namespace ran
                 }
                 LEXDEL;
             }
-            else if (lexlist.at(0).type == lextype::tag)//tag开头的是有名成员
+            else if (lexlist.at(0).type == lextype::tag) // tag开头的是有名成员
             {
                 if (lexlist.at(1).word != "#")
                 {
@@ -98,7 +98,7 @@ namespace ran
                 }
                 LEXDEL;
                 LEXDEL;
-                if (node->content_discription == "addr")//处理addr类型特殊情况
+                if (node->content_discription == "addr") //处理addr类型特殊情况
                 {
                     if (lexlist.at(1).word != "(" || lexlist.at(3).word != ")")
                     {
@@ -128,5 +128,10 @@ namespace ran
         }
         sttree = sttree->father;
         export_flag = false;
+    }
+
+    void make_express(syntax_tree sttree, std::vector<pair> &lexlist)
+    {
+        
     }
 };

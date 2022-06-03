@@ -97,9 +97,9 @@ namespace ran
                     LEXDEL;
                 }
             }
-            else
+            else//不是关键字就是全局表达式
             {
-                LEXDEL;
+                make_express(sttree, lexlist);
             }
         }
     }
