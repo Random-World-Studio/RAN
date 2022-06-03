@@ -13,4 +13,6 @@
 
 编译器完成了词法分析。
 
+正在进行语法树构建，如下是demo中的test.ran示例代码的编译效果图。
+目前只完成了import语法和struct声明语法的分析。
 ![运行效果图](sources/effect.png)
