@@ -92,6 +92,10 @@ namespace ran
                 {
                     make_struct(sttree, lexlist);
                 }
+                else if(lexlist.at(0).word == "def")
+                {
+                    make_function(sttree, lexlist);
+                }
                 else
                 {
                     LEXDEL;

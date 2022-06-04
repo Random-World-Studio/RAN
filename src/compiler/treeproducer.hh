@@ -1,5 +1,7 @@
 #define LEXDEL lexlist.erase(lexlist.begin())
 
+#include "../global/puncutation.hh"
+
 namespace ran
 {
 
@@ -127,11 +129,59 @@ namespace ran
             membercount++;
         }
         sttree = sttree->father;
-        export_flag = false;
+    }
+
+    void do_make_express(syntax_tree sttree, std::vector<pair> &lexlist)
+    { //TODO构建表达式
     }
 
     void make_express(syntax_tree sttree, std::vector<pair> &lexlist)
     {
-        
+        std::vector<pair> expression;
+        while (operators.find(lexlist.at(0).word) != std::string::npos)
+        {
+            expression.push_back(lexlist.at(0));
+            LEXDEL;
+        }
+        LEXDEL;
+        do_make_express(sttree, expression);
+    }
+
+    void make_function(syntax_tree sttree, std::vector<pair> &lexlist)
+    {
+        LEXDEL;
+        if (lexlist.at(0).type != lextype::tag)
+        {
+            err(RANC, "Function name needed.");
+            exit_compiling(-12);
+        }
+        syntax_tree node = new StTree;
+        {
+            node->father = sttree;
+            node->content = ":";
+            node->content_discription = "def";
+            node->type = syntax::__block;
+            sttree->child.push_back(node);
+        }
+        sttree = node;
+        {
+            syntax_tree funcdesc = new StTree;
+            {
+                funcdesc->father = sttree;
+                funcdesc->type = syntax::__tag;
+                funcdesc->content = lexlist.at(0).word;
+                funcdesc->content_discription = nullptr;
+                sttree->child.push_back(funcdesc);
+            }
+            LEXDEL;
+            if (lexlist.at(0).type != lextype::__operator)
+            {
+                err(RANC, "Arguments list needed.");
+                exit_compiling(-13);
+            }
+            //TODO开始读取参数列表，并在读取参数列表后检查并确定返回类型
+        }
+        sttree = sttree->father;
+        export_flag = false;
     }
 };
